@@ -9,6 +9,7 @@ import Orders from "./Orders";
 import Products from "./Products";
 import Register from "./Register";
 import SingleProduct from "./SingleProduct";
+import LandingError from "./LandingError";
 export {
   About,
   Cart,
@@ -21,4 +22,5 @@ export {
   Products,
   Register,
   SingleProduct,
+  LandingError,
 };

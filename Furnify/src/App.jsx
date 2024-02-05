@@ -9,9 +9,10 @@ import {About,
   Orders,
   Products,
   Register,
-  SingleProduct} from "./Pages/index"
+  SingleProduct,LandingError} from "./Pages/index"
   import {createBrowserRouter, RouterProvider} from "react-router-dom"
-
+  import { loader as landingLoader } from "./Pages/Landing"
+import {loader as SingleProductLoader} from "./Pages/SingleProduct"
 
 function App() {
   
@@ -23,7 +24,9 @@ function App() {
       children : [
         {
           index : true,
-          element : <Landing/>
+          element : <Landing/>,
+          errorElement : <LandingError/>,
+          loader: landingLoader
         },
         {
           path : "about",
@@ -46,8 +49,9 @@ function App() {
           element : <Products/>
         },
         {
-          path : "products:id",
-          element : <SingleProduct/>
+          path : "products/:id",
+          element : <SingleProduct/>,
+          loader:SingleProductLoader
         },
       ] 
     },

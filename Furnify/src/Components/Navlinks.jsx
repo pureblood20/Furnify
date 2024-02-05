@@ -11,7 +11,7 @@ const Navlinks = () => {
         { id: 6, url: 'orders', text: 'orders' },
       ];
   return (
-    <div>
+    <>
         {
             links.map((item)=>{
                 return(
@@ -22,7 +22,7 @@ const Navlinks = () => {
                 )
             })
         }
-    </div>
+    </>
   )
 }
 
