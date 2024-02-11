@@ -13,7 +13,7 @@ import {About,
   import {createBrowserRouter, RouterProvider} from "react-router-dom"
   import { loader as landingLoader } from "./Pages/Landing"
 import {loader as SingleProductLoader} from "./Pages/SingleProduct"
-
+import {loader as ProductsLoader} from "./Pages/Products"
 function App() {
   
   const router = createBrowserRouter([
@@ -46,7 +46,8 @@ function App() {
         },
         {
           path : "products",
-          element : <Products/>
+          element : <Products/>,
+          loader:ProductsLoader
         },
         {
           path : "products/:id",

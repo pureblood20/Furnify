@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import customFetch from "../Utils";
+import {customFetch,generateAmountOptions} from "../index";
 import { useState } from "react";
 
 export const loader = async(data) =>{
@@ -24,7 +24,7 @@ const SingleProduct = () => {
     <div className="text-md breadcrumbs">
       <ul>
       <li><Link to="/">Home</Link></li> 
-      <li>Products</li>
+      <li><Link to="/products">Products</Link></li>
       </ul>
      </div>
 
@@ -56,9 +56,7 @@ const SingleProduct = () => {
               value={amount}
               onChange={handleAmount}
             >
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
+              {generateAmountOptions(10)}
             </select>
           </div>
           {/* cart button */}
