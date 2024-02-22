@@ -1,23 +1,25 @@
 /* eslint-disable react/prop-types */
 
+import { useNavigation } from "react-router-dom";
 
-import { useNavigation } from "react-router-dom"
+const SubmitBtn = ({ label }) => {
+  const navigate = useNavigation();
 
-
-const SubmitBtn = ({label}) => {
-    const navigate = useNavigation()
-    console.log(navigate.state);
-    const isLoading = navigate.state === 'submitting'
+  const isLoading = navigate.state === "submitting";
   return (
     <button
-      type='submit'
-      className='btn btn-primary btn-block'
+      type="submit"
+      className="btn btn-primary btn-block"
       disabled={isLoading}
     >
-    {isLoading? <span className="loading loading-spinner">loading...</span> :   label}
-    {/* {label} */}
-        </button>
-  )
-}
+      {isLoading ? (
+        <span className="loading loading-spinner">loading...</span>
+      ) : (
+        label
+      )}
+      {/* {label} */}
+    </button>
+  );
+};
 
-export default SubmitBtn
+export default SubmitBtn;

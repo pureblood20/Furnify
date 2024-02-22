@@ -1,27 +1,31 @@
-
-import {Filters,
+import {
+  Filters,
   PaginationContainer,
-  ProductsContainer} from "../Components/"
-  import customFetch from "../index"
+  ProductsContainer,
+} from "../Components/";
+import customFetch from "../index";
 
-  export const loader =async () =>{
-    const response = await customFetch.get("/products")
-    const products = response.data.data
-    const meta = response.data.meta
-    return {products,meta}
-  }
+export const loader = async ({ request }) => {
+  const filterSearch = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
+  const response = await customFetch.get("/products", {
+    params: filterSearch,
+  });
+
+  const products = response.data.data;
+  const meta = response.data.meta;
+  return { products, meta, filterSearch };
+};
 
 const Products = () => {
- 
-
   return (
-    
     <>
-   <Filters/>
-   <ProductsContainer/>
-   <PaginationContainer/>
+      <Filters />
+      <ProductsContainer />
+      <PaginationContainer />
     </>
-  )
-} 
+  );
+};
 
-export default Products
+export default Products;
