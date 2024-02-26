@@ -10,6 +10,8 @@ import ProductsGrid from "./ProductsGrid";
 import Filters from "./Filters";
 import ProductsContainer from "./ProductsContainer";
 import PaginationContainer from "./PaginationContainer";
+import CartTotals from "./CartTotals";
+import CartItemList from "./CartItemList";
 
 export {
   FormInput,
@@ -21,7 +23,9 @@ export {
   FeaturedProducts,
   SectionTitle,
   ProductsGrid,
-    Filters,
-    PaginationContainer,
-    ProductsContainer
+  Filters,
+  PaginationContainer,
+  ProductsContainer,
+  CartTotals,
+  CartItemList,
 };

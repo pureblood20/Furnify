@@ -10,6 +10,7 @@ import Products from "./Products";
 import Register from "./Register";
 import SingleProduct from "./SingleProduct";
 import LandingError from "./LandingError";
+
 export {
   About,
   Cart,
