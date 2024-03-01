@@ -1,23 +1,15 @@
-import { useEffect, useState } from "react";
 import { Navlinks } from "../Components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../Features/User/userSlice";
 
 const Navbar = () => {
-  const getThemeFromLocal = () => {
-    return localStorage.getItem("theme") || "valentine";
-  };
+  const dispatch = useDispatch();
 
-  const [theme, setTheme] = useState(getThemeFromLocal());
   const handleTheme = () => {
-    const newTheme = theme === "valentine" ? "forest" : "valentine";
-    setTheme(newTheme);
+    dispatch(toggleTheme());
   };
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
   const numOfIteminCart = useSelector(
     (state) => state.cartState.numItemsInCart
   );

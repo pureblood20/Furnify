@@ -6,7 +6,7 @@ import { generateAmountOptions } from "..";
 const CartItem = ({ cartItem }) => {
   const { cartID, title, price, image, amount, company, selectedColor } =
     cartItem;
-  console.log(cartID);
+
   const dispatch = useDispatch();
   const handleRemoveItem = () => {
     dispatch(removeItem({ product: cartItem }));
