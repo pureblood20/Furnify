@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../Features/User/userSlice";
 import { clearItem } from "../Features/Cart/cartSlice";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Header = () => {
     navigate("/");
     dispatch(logoutUser());
     dispatch(clearItem());
+    toast.success("Logged out successfully");
   };
   return (
     <header className="bg-neutral py-2 text-neutral-content">
