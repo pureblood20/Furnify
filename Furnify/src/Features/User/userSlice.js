@@ -6,6 +6,10 @@ const themes = {
   valentine: "valentine",
 };
 
+const getUserFromLocal = () => {
+  return JSON.parse(localStorage.getItem("user")) || null;
+};
+
 const getThemeFromLocal = () => {
   const theme = localStorage.getItem("theme") || "valentine";
   document.documentElement.setAttribute("data-theme", theme);
@@ -13,7 +17,7 @@ const getThemeFromLocal = () => {
 };
 
 const initialState = {
-  user: { username: "shiv" },
+  user: getUserFromLocal(),
   theme: getThemeFromLocal(),
 };
 
@@ -22,7 +26,10 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     loginUser: (state, action) => {
-      console.log("login");
+      const user = { ...action.payload.user, token: action.payload.jwt };
+      console.log(user);
+      state.user = user;
+      localStorage.setItem("user", JSON.stringify(user));
     },
     logoutUser: (state) => {
       state.user = null;

@@ -8,7 +8,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userExist = useSelector((state) => state.userState.user);
-  console.log(userExist);
+
   const handleLogout = () => {
     navigate("/");
     dispatch(logoutUser());
