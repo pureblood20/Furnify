@@ -4,10 +4,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../Features/Cart/cartSlice";
 
-export const loader = async (data) => {
-  console.log(data);
+const singleProductQuery = (id) => {
+  return {
+    queryKey: ["singleProduct", id],
+    queryFn: () => customFetch.get(`/products/${id}`),
+  };
+};
+
+export const loader = (queryClient) => async (data) => {
   const id = data.params.id;
-  const res = await customFetch.get(`/products/${id}`);
+  const res = await queryClient.ensureQueryData(singleProductQuery(id));
   const singleProduct = res.data.data;
   return singleProduct;
 };
@@ -16,20 +22,20 @@ const SingleProduct = () => {
   const singleProduct = useLoaderData();
   const { image, title, price, description, colors, company } =
     singleProduct.attributes;
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [productColor, setSelectedColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
 
   const handleAmount = (e) => {
     setAmount(parseInt(e.target.value));
   };
   const cartProducts = {
-    cartID: singleProduct.id + selectedColor,
+    cartID: singleProduct.id + productColor,
     productID: singleProduct.id,
     image,
     title,
     price,
     company,
-    selectedColor,
+    productColor,
     amount,
   };
 
@@ -72,7 +78,7 @@ const SingleProduct = () => {
           {colors.map((color) => (
             <button
               className={`badge h-6 w-6 mr-2 ${
-                color === selectedColor && "border-2 border-secondary"
+                color === productColor && "border-2 border-secondary"
               }`}
               style={{ backgroundColor: color }}
               key={color}

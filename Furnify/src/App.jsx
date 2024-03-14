@@ -13,13 +13,27 @@ import {
   SingleProduct,
   LandingError,
 } from "./Pages/index";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { loader as landingLoader } from "./Pages/Landing";
 import { loader as SingleProductLoader } from "./Pages/SingleProduct";
 import { loader as ProductsLoader } from "./Pages/Products";
+import { loader as checkoutLoader } from "./Pages/Checkout";
+import { loader as ordersLoader } from "./Pages/Orders";
 import { action as registerAction } from "./Pages/Register";
 import { action as loginAction } from "./Pages/Login";
+import { action as checkoutAction } from "./Components/CheckoutForm";
 import store from "./store";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
 
 function App() {
   const router = createBrowserRouter([
@@ -32,7 +46,7 @@ function App() {
           index: true,
           element: <Landing />,
           errorElement: <LandingError />,
-          loader: landingLoader,
+          loader: landingLoader(queryClient),
         },
         {
           path: "about",
@@ -45,20 +59,23 @@ function App() {
         {
           path: "checkout",
           element: <Checkout />,
+          loader: checkoutLoader(store),
+          action: checkoutAction(store, queryClient),
         },
         {
           path: "Orders",
           element: <Orders />,
+          loader: ordersLoader(store, queryClient),
         },
         {
           path: "products",
           element: <Products />,
-          loader: ProductsLoader,
+          loader: ProductsLoader(queryClient),
         },
         {
           path: "products/:id",
           element: <SingleProduct />,
-          loader: SingleProductLoader,
+          loader: SingleProductLoader(queryClient),
         },
       ],
     },
@@ -78,7 +95,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router}></RouterProvider>
+      </QueryClientProvider>
     </>
   );
 }

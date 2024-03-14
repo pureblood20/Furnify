@@ -4,7 +4,7 @@ import { editItem, removeItem } from "../Features/Cart/cartSlice";
 import { generateAmountOptions } from "..";
 
 const CartItem = ({ cartItem }) => {
-  const { cartID, title, price, image, amount, company, selectedColor } =
+  const { cartID, title, price, image, amount, company, productColor } =
     cartItem;
 
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const CartItem = ({ cartItem }) => {
           color :
           <span
             className="badge badge-sm"
-            style={{ backgroundColor: selectedColor }}
+            style={{ backgroundColor: productColor }}
           ></span>
         </p>
       </div>

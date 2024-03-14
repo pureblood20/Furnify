@@ -12,6 +12,9 @@ import ProductsContainer from "./ProductsContainer";
 import PaginationContainer from "./PaginationContainer";
 import CartTotals from "./CartTotals";
 import CartItemList from "./CartItemList";
+import CheckoutForm from "./CheckoutForm";
+import OrdersList from "./OrdersList";
+import OrdersPagination from "./OrdersPagination";
 
 export {
   FormInput,
@@ -28,4 +31,7 @@ export {
   ProductsContainer,
   CartTotals,
   CartItemList,
+  CheckoutForm,
+  OrdersList,
+  OrdersPagination,
 };
