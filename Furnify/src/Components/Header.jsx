@@ -3,16 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../Features/User/userSlice";
 import { clearItem } from "../Features/Cart/cartSlice";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const userExist = useSelector((state) => state.userState.user);
 
   const handleLogout = () => {
     navigate("/");
     dispatch(logoutUser());
     dispatch(clearItem());
+    queryClient.removeQueries();
     toast.success("Logged out successfully");
   };
   return (

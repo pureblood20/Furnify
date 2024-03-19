@@ -3,7 +3,7 @@ import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 const OrdersPagination = () => {
   const { meta } = useLoaderData();
   const { pageCount, page } = meta.pagination;
-
+  console.log(pageCount);
   // const pages = Array.from({ length: pageCount }, (_, index) => {
   //   return index + 1;
   // });
@@ -66,6 +66,10 @@ const OrdersPagination = () => {
     );
     return pageButtons;
   };
+
+  if (pageCount < 2) {
+    return null;
+  }
 
   return (
     <div className="mt-16 flex justify-end">
